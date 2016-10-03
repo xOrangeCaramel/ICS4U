@@ -25,13 +25,16 @@ public class SchoolSystem {
 			else if (option == 2){
 				System.out.println("Which student would you like to print?");
 				int n = input.nextInt();
-				
 				printStudent(studentRecs.get(n));
 
 			}
 			else if (option == 3){
 				printAll();
 			}
+			//else if (option == 4){
+			//	System.out.println("Eneter the name first name of the student you would like to remove.");
+			//	int n = input.nextInt();
+			//}
 
 			
 		} while(option != 10);
@@ -67,13 +70,17 @@ public class SchoolSystem {
 		student.setProvince(prov);
 		
 		System.out.println("Please enter the postal code. (A1A 1A1).");
-		String posCode = input.nextLine();
-		if (input.substring(0, 1).equals(isDigit));
-		student.setPostalCode(posCode);
+		String postCode = input.nextLine();
+		student.setPostalCode(postCode);
 		
 		System.out.println("Please enter the phone number");
 		String num = input.nextLine();
-		student.setPhoneNum(num);
+		if (num.length() == 7){
+			String pnum= num.substring(0, 2) + "-" + num.substring(3, 5) + "-" + num.substring(6);
+			student.setPhoneNum(pnum);
+		}
+		
+		
 		
 		System.out.println("Please enter the date of birth.");
 		String bDate = input.nextLine();
@@ -85,7 +92,15 @@ public class SchoolSystem {
 		studentRecs.add(student);
 		
 	}
-	
+	public static String checkPhoneNum(String phoneNum){
+		String num =  "\\d\\d\\d([,\\s])?\\d\\d\\d([,\\s])?\\d\\d\\d\\d";
+		if (phoneNum.matches(num)){
+			return phoneNum;
+		}else{
+			return "Please try again";
+		}
+	}
+
 	public static void printStudent(StudentInfo student){
 		
 		System.out.println(student.getFirstName() + ", " + student.getLastName());
