@@ -75,11 +75,8 @@ public class SchoolSystem {
 		
 		System.out.println("Please enter the phone number");
 		String num = input.nextLine();
-		if (num.length() == 7){
-			String pnum= num.substring(0, 2) + "-" + num.substring(3, 5) + "-" + num.substring(6);
-			student.setPhoneNum(pnum);
-		}
 		
+		student.setPhoneNum(checkPhoneNum(num));
 		
 		
 		System.out.println("Please enter the date of birth.");
@@ -92,13 +89,24 @@ public class SchoolSystem {
 		studentRecs.add(student);
 		
 	}
-	public static String checkPhoneNum(String phoneNum){
-		String num =  "\\d\\d\\d([,\\s])?\\d\\d\\d([,\\s])?\\d\\d\\d\\d";
-		if (phoneNum.matches(num)){
-			return phoneNum;
+	public static String checkPhoneNum(String num){
+		if (num.length() == 10){
+			String pnum= num.substring(0, 3) + "-" + num.substring(3, 6) + "-" + num.substring(6);
+			return pnum;
+		}else if(num.length() == 12){
+			if (num.substring(3,3).equals("-")){
+				if (num.substring(7,7).equals("-")){
+					return num;
+				}
+				return num;
+			}
+			return num;
 		}else{
-			return "Please try again";
+			System.out.println("Invalid number. Please enter a phone number.");
+			String num1 = input.nextLine();
+			return checkPhoneNum(num1);
 		}
+		
 	}
 
 	public static void printStudent(StudentInfo student){
@@ -121,4 +129,18 @@ public class SchoolSystem {
 		
 		}
 	}
+	public static String checkPostalCode(String postCode){
+		if (postCode.length() == 6){
+			if (postCode.substring(0).contentEquals("M3N1M5")){
+				return postCode.substring(0, 3) + " " + postCode.substring(3);
+			}
+			return postCode.substring(0, 3) + " " + postCode.substring(3);
+		}else{
+			System.out.println("Invalid postal code. Please enter a postal code.");
+			String postCode1 = input.nextLine();
+			return checkPostalCode(postCode1);
+		}
+		
+	}
+}
 }
