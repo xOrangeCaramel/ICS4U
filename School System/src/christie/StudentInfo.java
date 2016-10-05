@@ -1,9 +1,34 @@
 package christie;
 
 public class StudentInfo {
+	private static long idGenerator = 300000000;
 	private String firstName, lastName, strAddress, city, province, postalCode, phoneNum, birthDate;
+	private long studentNumber;
 	//private int birthDate;
 	
+	public StudentInfo(){
+		this.setFirstName("");
+		this.setLastName("");
+		this.setStrAddress("");
+		this.setCity("");
+		this.setProvince("");
+		this.setPostalCode("");
+		this.setPhoneNum("");
+		this.setBirthDate("");
+		this.studentNumber=idGenerator;
+		idGenerator++;
+	}
+	public StudentInfo(String fName, String lName, String strAd, String c, String prov, String postCode, String phone, String bDate){
+		setFirstName(fName);
+		setLastName(lName);
+		setStrAddress(strAd);
+		setCity(c);
+		setPostalCode(postCode);
+		setProvince(prov);
+		setPhoneNum(phone);	
+		setBirthDate(bDate);
+	}
+
 	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}

@@ -31,10 +31,6 @@ public class SchoolSystem {
 			else if (option == 3){
 				printAll();
 			}
-			//else if (option == 4){
-			//	System.out.println("Eneter the name first name of the student you would like to remove.");
-			//	int n = input.nextInt();
-			//}
 
 			
 		} while(option != 10);
@@ -45,47 +41,41 @@ public class SchoolSystem {
 	}
 	
 	public static void addStudent(){
-
-		StudentInfo student = new StudentInfo();
 		
 		System.out.println("Please enter the first name.");
 		input.nextLine();
 		String fName = input.nextLine();
-		student.setFirstName(fName);
 		
 		System.out.println("Please enter the last name.");
 		String lName = input.nextLine();
-		student.setLastName(lName);
+
 		
 		System.out.println("Please enter the street address.");
 		String strAd = input.nextLine();
-		student.setStrAddress(strAd);
+
 		
 		System.out.println("Please enter the city.");
 		String city = input.nextLine();
-		student.setCity(city);
+
 		
 		System.out.println("Please enter the province.");
 		String prov = input.nextLine();
-		student.setProvince(prov);
+
 		
 		System.out.println("Please enter the postal code. (A1A 1A1).");
 		String postCode = input.nextLine();
-		student.setPostalCode(postCode);
+		postCode = checkPostalCode(postCode);
 		
 		System.out.println("Please enter the phone number");
 		String num = input.nextLine();
-		
-		student.setPhoneNum(checkPhoneNum(num));
-		
+		num = checkPhoneNum(num);
 		
 		System.out.println("Please enter the date of birth.");
 		String bDate = input.nextLine();
-		student.setBirthDate(bDate);
-		
+
+		StudentInfo student = new StudentInfo(fName, lName, strAd, city, prov, postCode, num, bDate);
 		System.out.println();
 
-		
 		studentRecs.add(student);
 		
 	}
@@ -108,7 +98,36 @@ public class SchoolSystem {
 		}
 		
 	}
-
+	
+	public static String checkPostalCode(String postCode){
+		if (postCode.length() == 6){
+			if (postCode.substring(0).contentEquals("M3N1M5")){
+				if(Character.isLetter(postCode.charAt(0))){
+					if(Character.isDigit(postCode.charAt(1))){
+						if(Character.isLetter(postCode.charAt(2))){
+							if(postCode.substring(3).equals(" ")){
+								if(Character.isDigit(postCode.charAt(4))){
+									if(Character.isLetter(postCode.charAt(5))){
+										if(Character.isDigit(postCode.charAt(6))){
+											
+										}
+									}
+								}
+							}
+						}
+					}
+					
+				}
+				return postCode.substring(0, 3) + " " + postCode.substring(3);
+			}
+			return postCode.substring(0, 3).toUpperCase() + " " + postCode.substring(3).toUpperCase();
+		}else{
+			System.out.println("Invalid postal code. Please enter a postal code.");
+			String postCode1 = input.nextLine();
+			return checkPostalCode(postCode1);
+		}
+		
+	}
 	public static void printStudent(StudentInfo student){
 		
 		System.out.println(student.getFirstName() + ", " + student.getLastName());
@@ -125,22 +144,7 @@ public class SchoolSystem {
 		for (int i = 0; i< studentRecs.size(); i++){  	
 			
 			printStudent(studentRecs.get(i));
-			
-		
 		}
 	}
-	public static String checkPostalCode(String postCode){
-		if (postCode.length() == 6){
-			if (postCode.substring(0).contentEquals("M3N1M5")){
-				return postCode.substring(0, 3) + " " + postCode.substring(3);
-			}
-			return postCode.substring(0, 3) + " " + postCode.substring(3);
-		}else{
-			System.out.println("Invalid postal code. Please enter a postal code.");
-			String postCode1 = input.nextLine();
-			return checkPostalCode(postCode1);
-		}
-		
-	}
 }
-}
+
