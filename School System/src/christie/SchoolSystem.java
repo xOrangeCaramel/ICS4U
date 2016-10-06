@@ -40,7 +40,7 @@ public class SchoolSystem {
 		System.out.println("Goodbye! :)");
 	}
 	
-	public static void addStudent(){
+	public static void addStudent() throws InvalidInputException{
 		
 		System.out.println("Please enter the first name.");
 		input.nextLine();
@@ -64,11 +64,10 @@ public class SchoolSystem {
 		
 		System.out.println("Please enter the postal code. (A1A 1A1).");
 		String postCode = input.nextLine();
-		postCode = checkPostalCode(postCode);
+
 		
-		System.out.println("Please enter the phone number");
+		System.out.println("Please enter the phone number.");
 		String num = input.nextLine();
-		num = checkPhoneNum(num);
 		
 		System.out.println("Please enter the date of birth.");
 		String bDate = input.nextLine();
@@ -78,56 +77,12 @@ public class SchoolSystem {
 
 		studentRecs.add(student);
 		
-	}
-	public static String checkPhoneNum(String num){
-		if (num.length() == 10){
-			String pnum= num.substring(0, 3) + "-" + num.substring(3, 6) + "-" + num.substring(6);
-			return pnum;
-		}else if(num.length() == 12){
-			if (num.substring(3,3).equals("-")){
-				if (num.substring(7,7).equals("-")){
-					return num;
-				}
-				return num;
-			}
-			return num;
-		}else{
-			System.out.println("Invalid number. Please enter a phone number.");
-			String num1 = input.nextLine();
-			return checkPhoneNum(num1);
-		}
+		System.out.println(lie.getMessage);
 		
 	}
+
 	
-	public static String checkPostalCode(String postCode){
-		if (postCode.length() == 6){
-			if (postCode.substring(0).contentEquals("M3N1M5")){
-				if(Character.isLetter(postCode.charAt(0))){
-					if(Character.isDigit(postCode.charAt(1))){
-						if(Character.isLetter(postCode.charAt(2))){
-							if(postCode.substring(3).equals(" ")){
-								if(Character.isDigit(postCode.charAt(4))){
-									if(Character.isLetter(postCode.charAt(5))){
-										if(Character.isDigit(postCode.charAt(6))){
-											
-										}
-									}
-								}
-							}
-						}
-					}
-					
-				}
-				return postCode.substring(0, 3) + " " + postCode.substring(3);
-			}
-			return postCode.substring(0, 3).toUpperCase() + " " + postCode.substring(3).toUpperCase();
-		}else{
-			System.out.println("Invalid postal code. Please enter a postal code.");
-			String postCode1 = input.nextLine();
-			return checkPostalCode(postCode1);
-		}
-		
-	}
+	
 	public static void printStudent(StudentInfo student){
 		
 		System.out.println(student.getFirstName() + ", " + student.getLastName());
